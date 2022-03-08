@@ -17,11 +17,11 @@ const context = {
 }
 
 const msg = {
-  to: `${context.key}`, 
-  from: 'simon@siherron.co.uk', 
-  subject: `${context.firstname}, Welcome to the MGM Vegas`,
-  text: 'Here is your complimentary $100 drinks pass and we hope you enjoy your stay.',
-  html: '<strong>Here is your complimentary $100 drinks pass and we hope you enjoy your stay.</strong>',
+	to: `${context.key}`, 
+	from: 'simon@siherron.co.uk', 
+	subject: `${context.firstname}, Welcome to the MGM Vegas`,
+	text: 'Here is your complimentary $100 drinks pass and we hope you enjoy your stay.',
+	html: '<strong>Here is your complimentary $100 drinks pass and we hope you enjoy your stay.</strong>',
 }
 
 const msg2 = {
@@ -32,23 +32,19 @@ const msg2 = {
 	html: '<strong>We hope you enjoy your stay.</strong>',
   }
 
-  //LaunchDarkly Flag Script.
-	client.on('ready', () => {
-
-		client.variation(process.env.FLAGNAME, context, "msg2").then((value)=>{
-
-			sgMail
-			.send(value === "msg" ? msg : msg2)
-			.then(() => {
-				console.log('Email sent')
-				client.flush();
-				console.log('Flush')
-				client.close();
-			})
-			.catch((error) => {
-				console.error(error)
-			});		
-
+//LaunchDarkly Flag Script.
+client.on('ready', () => {
+	client.variation(process.env.FLAGNAME, context, "msg2").then((value)=>{
+		sgMail
+		.send(value === "msg" ? msg : msg2)
+		.then(() => {
+			console.log('Email sent')
+			client.flush();
+			console.log('Flush')
+			client.close();
 		})
-		
-	});
+		.catch((error) => {
+			console.error(error)
+		});		
+	})	
+});
