@@ -34,14 +34,20 @@ const msg2 = {
 
 //LaunchDarkly Flag Script.
 client.on('ready', () => {
-	client.variation(process.env.FLAGNAME, context, "msg2").then((value)=>{
+	client.variation(process.env.FLAGNAME, context, "msg")
+	.then((value)=>{
 		sgMail
 		.send(value === "msg" ? msg : msg2)
 		.then(() => {
 			console.log('Email sent')
-			client.flush();
-			console.log('Flush')
-			client.close();
+			
+			setTimeout(()=> {
+				client.flush();
+				console.log('Flush');
+				console.log('Close');
+				client.close();
+				
+			}, 5000)
 		})
 		.catch((error) => {
 			console.error(error)
