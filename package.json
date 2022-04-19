@@ -9,7 +9,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@sendgrid/mail": "^7.6.1"
+    "@sendgrid/mail": "^7.6.1",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "launchdarkly-node-server-sdk": "^6.3.1"

@@ -8,7 +8,7 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const context = {
-	key: "sherron+4@launchdarkly.com",
+	key: process.env.LD_USER_KEY,
 	firstname: "Simon",
 	privateAttributeNames:["firstname"],
 	custom: {
